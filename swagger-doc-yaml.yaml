@@ -1,0 +1,1034 @@
+openapi: 3.0.0
+paths:
+  /currency:
+    get:
+      operationId: CurrencyController_list
+      parameters:
+        - description: Currency ID
+          example: '1'
+          required: false
+          name: id
+          in: query
+          schema:
+            type: string
+        - description: Currency code
+          example: ETH
+          required: false
+          name: code
+          in: query
+          schema:
+            type: string
+        - description: Currency name
+          example: ethereum
+          required: false
+          name: name
+          in: query
+          schema:
+            type: string
+        - description: Currency type
+          example: CRYPTO
+          required: false
+          name: type
+          in: query
+          schema:
+            enum:
+              - FIAT
+              - CRYPTO
+              - STABLE
+            type: string
+        - description: Currency chain
+          example: main
+          required: false
+          name: chain
+          in: query
+          schema:
+            type: string
+        - description: Currency network
+          example: ethereum
+          required: false
+          name: network
+          in: query
+          schema:
+            type: string
+        - description: Currency contract address
+          example: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+          required: false
+          name: contract
+          in: query
+          schema:
+            type: string
+        - description: Currency processor
+          example: ETH
+          required: false
+          name: processor
+          in: query
+          schema:
+            type: string
+        - description: Currency status
+          required: false
+          name: status
+          in: query
+          schema:
+            enum:
+              - enable
+              - disable
+            type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - required: false
+          name: pageSize
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 50
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Page'
+                  - properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CurrencyResponse'
+      tags: &ref_0
+        - reference
+  /currency/{code}:
+    get:
+      operationId: CurrencyController_view
+      parameters:
+        - name: code
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_0
+  /company:
+    get:
+      operationId: CompanyController_
+      parameters:
+        - required: false
+          name: page
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - required: false
+          name: pageSize
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 50
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Page'
+                  - properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CompanyResponse'
+      tags: &ref_1
+        - client
+    post:
+      operationId: CompanyController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyRequest'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_1
+  /company/{id}:
+    put:
+      operationId: CompanyController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Company ID
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyRequest'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_1
+  /merchant:
+    get:
+      operationId: MerchantController_list
+      parameters:
+        - example: Some merchant name
+          required: false
+          name: name
+          in: query
+          schema:
+            type: string
+        - example: '1'
+          required: false
+          name: companyId
+          in: query
+          schema:
+            format: int64
+            type: integer
+        - required: false
+          name: page
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - required: false
+          name: pageSize
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 50
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Page'
+                  - properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/MerchantResponse'
+      tags: &ref_2
+        - client
+    post:
+      operationId: MerchantController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantResponse'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_2
+  /merchant/{id}:
+    put:
+      operationId: MerchantController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Merchant ID
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantResponse'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_2
+  /project:
+    get:
+      operationId: ProjectController_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 50
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Page'
+                  - properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ProjectResponse'
+      tags: &ref_3
+        - reference
+    post:
+      operationId: ProjectController_create
+      summary: project creation
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectRequest'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+      tags: *ref_3
+  /project/{id}:
+    put:
+      operationId: ProjectController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Project ID
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectRequest'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_3
+  /project/{id}/api-key:
+    get:
+      operationId: ProjectController_listApiTokens
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: Project ID
+          schema:
+            type: string
+        - example: '1'
+          name: projectId
+          in: query
+          required: true
+          schema:
+            type: string
+        - example: 2023.08.23 19:22:33
+          required: false
+          name: expiredAt
+          in: query
+          schema:
+            type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - required: false
+          name: pageSize
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 50
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Page'
+                  - properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ApiKeyResponse'
+      tags: *ref_3
+    post:
+      operationId: ProjectController_generateApiToken
+      parameters:
+        - name: id
+          required: true
+          in: path
+          example: '1'
+          description: Project ID
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyRequest'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyResponse'
+      tags: *ref_3
+  /project/{id}/api-key/{kid}:
+    delete:
+      operationId: ProjectController_revokeApiToken
+      parameters:
+        - name: id
+          required: true
+          in: path
+          example: '1'
+          description: Project ID
+          schema:
+            type: string
+        - name: kid
+          required: true
+          in: path
+          description: Api key ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_3
+  /payment/order:
+    get:
+      operationId: OrderController_searchOrder
+      parameters:
+        - name: orderId
+          required: false
+          in: query
+          description: Filter by order ID
+          schema:
+            nullable: true
+            type: string
+        - name: paymentId
+          required: false
+          in: query
+          description: Filter by payment ID
+          schema:
+            nullable: true
+            type: string
+        - name: status
+          required: false
+          in: query
+          description: Filter by order status
+          schema:
+            nullable: true
+            enum: &ref_4
+              - new
+              - verification
+              - awaiting_payment
+              - awaiting_confirmation
+              - confirmation_failed
+              - underpayment
+              - overpayment
+              - processing
+              - submitted
+              - payed
+              - expired
+              - decline
+              - failed
+              - error
+            type: string
+        - name: type
+          required: false
+          in: query
+          description: Filter by order type
+          schema:
+            nullable: true
+            enum: &ref_5
+              - payin
+              - payout
+            type: string
+        - name: currencyInCode
+          required: false
+          in: query
+          description: Filter by currency in code
+          schema:
+            nullable: true
+            type: string
+        - name: currencyOutCode
+          required: false
+          in: query
+          description: Filter by currency out code
+          schema:
+            nullable: true
+            type: string
+        - name: limit
+          required: true
+          in: query
+          description: Count record on the page
+          schema:
+            default: 50
+            type: number
+        - name: page
+          required: true
+          in: query
+          description: Current page number
+          schema:
+            nullable: false
+            default: 1
+            type: number
+        - required: false
+          name: page
+          in: query
+          schema:
+            minimum: 1
+            default: 1
+            type: number
+        - required: false
+          name: pageSize
+          in: query
+          schema:
+            minimum: 1
+            maximum: 50
+            default: 50
+            type: number
+        - required: false
+          description: Filter by order ID
+          name: orderId
+          in: query
+          schema:
+            nullable: true
+            type: string
+        - required: false
+          description: Filter by project ID
+          name: projectId
+          in: query
+          schema:
+            format: int64
+            nullable: true
+            type: integer
+        - required: false
+          description: Filter by payment ID
+          name: paymentId
+          in: query
+          schema:
+            nullable: true
+            type: string
+        - required: false
+          description: Filter by order status
+          name: status
+          in: query
+          schema:
+            nullable: true
+            enum: *ref_4
+            type: string
+        - required: false
+          description: Filter by order type
+          name: type
+          in: query
+          schema:
+            nullable: true
+            enum: *ref_5
+            type: string
+        - required: false
+          description: Filter by currency in code
+          name: currencyInCode
+          in: query
+          schema:
+            nullable: true
+            type: string
+        - required: false
+          description: Filter by currency out code
+          name: currencyOutCode
+          in: query
+          schema:
+            nullable: true
+            type: string
+        - required: true
+          description: Count record on the page
+          name: limit
+          in: query
+          schema:
+            default: 50
+            type: number
+        - required: true
+          description: Current page number
+          name: page
+          in: query
+          schema:
+            nullable: false
+            default: 1
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Page'
+                  - properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/OrderResponse'
+      tags: &ref_6
+        - payment
+  /payment/order/{id}:
+    get:
+      operationId: OrderController_searchOperation
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orderId
+          required: false
+          in: query
+          description: Filter by order ID
+          schema:
+            nullable: true
+            type: string
+        - name: status
+          required: false
+          in: query
+          description: Filter by operation status ID
+          schema:
+            nullable: true
+            enum:
+              - unconfirmed
+              - confirmed
+              - finished
+              - failed
+              - processing
+            type: string
+        - name: type
+          required: false
+          in: query
+          description: Filter by operation type
+          schema:
+            nullable: true
+            enum:
+              - payin
+              - payout
+            type: string
+        - name: addressIn
+          required: false
+          in: query
+          description: Filter by input address
+          schema:
+            nullable: true
+            type: string
+        - name: addressOut
+          required: false
+          in: query
+          description: Filter by output address
+          schema:
+            nullable: true
+            type: string
+        - name: currencyInCode
+          required: false
+          in: query
+          description: Filter by currency in code
+          schema:
+            nullable: true
+            type: string
+        - name: currencyOutCode
+          required: false
+          in: query
+          description: Filter by currency out code
+          schema:
+            nullable: true
+            type: string
+        - name: limit
+          required: true
+          in: query
+          description: Count record on the page
+          schema:
+            nullable: false
+            default: 50
+            type: number
+        - name: page
+          required: true
+          in: query
+          description: Current page number
+          schema:
+            nullable: false
+            default: 1
+            type: number
+      responses:
+        '200':
+          description: ''
+      tags: *ref_6
+info:
+  title: admin API
+  description: Etellar admin api
+  version: '1'
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    PageMeta:
+      type: object
+      properties:
+        page:
+          type: number
+          example: 1
+        pageSize:
+          type: number
+          example: 50
+        itemCount:
+          type: number
+          example: 1000
+        pageCount:
+          type: number
+          example: 20
+      required:
+        - page
+        - pageSize
+        - itemCount
+        - pageCount
+    Page:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+        meta:
+          $ref: '#/components/schemas/PageMeta'
+      required:
+        - data
+        - meta
+    CurrencyResponse:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        code:
+          type: string
+          description: Currency code
+          example: ETH
+        name:
+          type: string
+          description: Currency name
+          example: ethereum
+        type:
+          type: string
+          description: Currency type
+          enum:
+            - FIAT
+            - CRYPTO
+            - STABLE
+          example: CRYPTO
+        chain:
+          type: string
+          description: Currency chain
+          example: main
+        confirmCount:
+          type: number
+          description: confirmations to approve
+          example: 2
+        network:
+          type: string
+          description: Currency network
+          example: ethereum
+        contract:
+          type: string
+          description: Currency contract address
+          example: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+        className:
+          type: string
+          description: Currency processor
+          example: ETH
+        status:
+          type: string
+          description: Currency status
+          enum:
+            - enable
+            - disable
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - code
+        - name
+        - type
+        - chain
+        - confirmCount
+        - network
+        - contract
+        - className
+        - status
+    CompanyResponse:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        name:
+          type: string
+          nullable: false
+          example: Some company name
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - name
+    PageOptions:
+      type: object
+      properties:
+        page:
+          type: number
+          minimum: 1
+          default: 1
+        pageSize:
+          type: number
+          minimum: 1
+          maximum: 50
+          default: 50
+    CompanyRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Some company name
+        pagination:
+          $ref: '#/components/schemas/PageOptions'
+      required:
+        - pagination
+    MerchantResponse:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        name:
+          type: string
+          nullable: false
+          example: Some merchant name
+        companyId:
+          format: int64
+          type: integer
+          nullable: false
+          example: '1'
+      required:
+        - id
+        - createdAt
+        - updatedAt
+    ProjectResponse:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        name:
+          type: string
+          example: Some project name
+        merchantId:
+          type: string
+          example: '1'
+        merchantName:
+          type: string
+          example: Coca-cola
+        companyName:
+          type: string
+          example: Coca-cola ltd
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - name
+        - merchantId
+    ProjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Some project name
+        merchantId:
+          type: string
+          example: '1'
+      required:
+        - name
+        - merchantId
+    ApiKeyResponse:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        apiKey:
+          type: string
+          example: bc1qpq6fukf7jjjuqnhqe0qte
+        projectId:
+          format: int64
+          type: integer
+        expiredAt:
+          format: date-time
+          type: string
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - apiKey
+        - projectId
+        - expiredAt
+    ApiKeyRequest:
+      type: object
+      properties:
+        projectId:
+          type: string
+          example: '1'
+        expiredAt:
+          type: string
+          example: 2023.08.23 19:22:33
+      required:
+        - projectId
+    OrderResponse:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        projectId:
+          type: string
+          description: projectId
+          example: '1'
+        customerId:
+          type: string
+          description: customerId
+          example: '16'
+        paymentId:
+          type: string
+          description: paymentId
+          example: CF3E3344FC9-d3579ddddd3Ef-4344d4B3-9122-DFBC110FAD93A
+        description:
+          type: string
+          description: description
+          example: Water payment
+        status:
+          type: string
+          description: status
+          example: payed
+        currencyInId:
+          type: string
+          description: currencyInId
+          example: '4'
+        currencyOutId:
+          type: string
+          description: currencyOutId
+          example: '1'
+        amountIn:
+          type: string
+          description: amountIn
+          example: '101.3300000000000000000000'
+        amountInActual:
+          type: string
+          description: amountInActual
+          example: 'null'
+        amountOut:
+          type: string
+          description: amountOut
+          example: '0.0000000000000000000000'
+        amountOutActual:
+          type: string
+          description: amountOutActual
+          example: 'null'
+        fee:
+          type: string
+          description: fee
+          example: 'null'
+        uuid:
+          type: string
+          description: uuid
+          example: b588bf2a-187d-4f3c-af66-bd2b8f5c8655
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - projectId
+        - customerId
+        - paymentId
+        - description
+        - status
+        - currencyInId
+        - currencyOutId
+        - amountIn
+        - amountInActual
+        - amountOut
+        - amountOutActual
+        - fee
+        - uuid
